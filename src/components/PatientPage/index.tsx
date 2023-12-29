@@ -1,4 +1,4 @@
-import { Patient } from "../../types";
+import { Patient, Entry } from "../../types";
 import patientService from "../../services/patients";
 import { useParams, } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -44,7 +44,20 @@ const PatientPage = () => {
                     <h2>{patient.name} {setIcon(patient.gender)}</h2>
                     <div>ssn: {patient.ssn}</div>
                     <div>occupation: {patient.occupation}</div>
+                    <h2>Entries</h2>
                 </div>
+            )}
+            {patient.map((patient: Patient) => 
+                patient.entries.map((entry: Entry) => 
+                    <div key={entry.id}>
+                        <div>{entry.date} <i>{entry.description}</i></div>
+                        <ul>
+                            {entry.diagnosisCodes?.map((code: string, index: number) => (
+                                <li key={index}>{code}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )
             )}
         </div>
     );
