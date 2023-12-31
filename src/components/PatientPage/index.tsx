@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
 import TransgenderIcon from '@mui/icons-material/Transgender';
+import EntryDetails from "./EntryDetails";
 
 
 const PatientPage = () => {
@@ -63,14 +64,7 @@ const PatientPage = () => {
             )}
             {patient.map((patient: Patient) => 
                 patient.entries.map((entry: Entry) => 
-                    <div key={entry.id}>
-                        <div>{entry.date} <i>{entry.description}</i></div>
-                        <ul>
-                            {entry.diagnosisCodes?.map((code: string, index: number) => (
-                                <li key={index}>{code} {showDiagnosis(code)}</li>
-                            ))}
-                        </ul>
-                    </div>
+                    <EntryDetails entry={entry} showDiagnosis={showDiagnosis}/>
                 )
             )}
         </div>
